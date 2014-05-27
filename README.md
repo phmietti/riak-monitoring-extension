@@ -11,6 +11,7 @@ An AppDynamics extension to be used with a stand alone Java machine agent to pro
 
   You can view the names of any other metrics to be configured here http://docs.basho.com/riak/latest/ops/running/stats-and-monitoring/
 
+  We also send a health check metric "Health Check=1"  (when success) or "Health Check=-1" (when failure).
 
 ## Installation ##
 
