@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="maven-antrun-" default="main"  >
+<target name="main">
+  <mkdir dir="/Users/kunal.gupta/Repos/AppDynamics/extensions/riak-monitoring-extension/target/RiakMonitor"/>
+  <copy todir="/Users/kunal.gupta/Repos/AppDynamics/extensions/riak-monitoring-extension/target/RiakMonitor">
+    <fileset dir="src/main/resources/conf" includes="monitor.xml"/>
+    <fileset dir="src/main/resources/conf" includes="config.yml"/>
+  </copy>
+  <copy todir="/Users/kunal.gupta/Repos/AppDynamics/extensions/riak-monitoring-extension/target/RiakMonitor">
+    <fileset dir="/Users/kunal.gupta/Repos/AppDynamics/extensions/riak-monitoring-extension/target" includes="riak-monitoring-extension.jar"/>
+  </copy>
+  <zip destfile="/Users/kunal.gupta/Repos/AppDynamics/extensions/riak-monitoring-extension/target/RiakMonitor.zip">
+    <zipfileset filemode="755" dir="/Users/kunal.gupta/Repos/AppDynamics/extensions/riak-monitoring-extension/target/RiakMonitor" prefix="RiakMonitor/"/>
+  </zip>
+  <delete dir="/Users/kunal.gupta/Repos/AppDynamics/extensions/riak-monitoring-extension/target/RiakMonitor"/>
+</target>
+</project>
