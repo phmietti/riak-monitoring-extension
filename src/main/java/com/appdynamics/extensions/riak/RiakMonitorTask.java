@@ -56,10 +56,26 @@ public class RiakMonitorTask implements Callable<RiakMetrics> {
             String key = entry.getKey();
             Object value = entry.getValue();
             if(metrics.contains(key) && value instanceof Number){
-                filteredMetrics.put(key,value.toString());
+                String attribStr = convertMetricValuesToString(value);
+                filteredMetrics.put(key,attribStr);
             }
         }
         return filteredMetrics;
+    }
+
+    /**
+     * Currently, appD controller only supports Integer values. This function will round all the decimals into integers and convert them into strings.
+     * @param attribute
+     * @return
+     */
+    private String convertMetricValuesToString(Object attribute) {
+        if(attribute instanceof Double){
+            return String.valueOf(Math.round((Double) attribute));
+        }
+        else if(attribute instanceof Float){
+            return String.valueOf(Math.round((Float) attribute));
+        }
+        return attribute.toString();
     }
 
     private String constructUrl() {
