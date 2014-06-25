@@ -104,6 +104,7 @@ For any questions or feature request, please contact [AppDynamics Center of Exce
 
 **Version:** 1.0
 **Controller Compatibility:** 3.7 or later
+**Riak version tested on:** 1.4.8 
 
 [GitHub]: https://github.com/Appdynamics/riak-monitoring-extension
 [Community]: http://community.appdynamics.com/
