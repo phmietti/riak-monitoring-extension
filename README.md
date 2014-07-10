@@ -88,6 +88,59 @@ Please make sure to not use tab (\t) while editing yaml files. You may want to v
 
      ```
 
+###Cluster level metrics : 
+ 
+As of 1.0.1 version of this extension, we support cluster level metrics only if each node in the cluster have a separate machine agent installed on it. There are two configurations required for this setup 
+ 
+1. Make sure that nodes belonging to the same cluster has the same <tier-name> in the<MACHINE_AGENT_HOME>/conf/controller-info.xml, we can gather cluster level metrics.  The tier-name here should be your cluster name. 
+ 
+2. Make sure that in every node in the cluster, the <MACHINE_AGENT_HOME>/monitors/RiakMonitor/config.yaml should emit the same metric path. To achieve this make the displayName to be empty string and remove the trailing "|" in the metricPrefix.  The config.yaml should be something as below
+
+``` 
+# List of riak servers
+    servers:
+      - host: "myDebian.sandbox.appdynamics.com"
+        port: 8098
+        displayName: ""
+
+    metrics: [
+      "node_gets",
+      "node_gets_total",
+      "node_puts",
+      "node_puts_total",
+      "vnode_gets",
+      "vnode_gets_total",
+      "vnode_puts_total",
+      "memory_processes_used",
+      "sys_process_count",
+      "pbc_connect",
+      "pbc_active"
+    ]
+
+    #prefix used to show up metrics in AppDynamics
+    metricPrefix:  "Custom Metrics|Riak"
+
+    # number of concurrent tasks
+    numberOfThreads: 10
+
+    #timeout for the thread in seconds
+    threadTimeout: 30
+
+    #configuration for making http calls
+    httpConfig: {
+      use-ssl : false,
+      proxy-host : "",
+      proxy-port : "",
+      proxy-username : "",
+      proxy-password : "",
+      proxy-use-ssl : "",
+      socket-timeout : 10, # in seconds
+      connect-timeout : 10 # in seconds
+    }
+```
+
+Please note that for now the cluster level metrics are obtained by the summing all the node level metrics in a cluster. Other operations like (average) will be supported in the future releases of the extension.
+
 ## Custom Dashboard ##
 
 ## Contributing ##
