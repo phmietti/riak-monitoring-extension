@@ -9,7 +9,7 @@
   <copy todir="/Users/kunal.gupta/Repos/AppDynamics/extensions/riak-monitoring-extension/target/RiakMonitor">
     <fileset dir="/Users/kunal.gupta/Repos/AppDynamics/extensions/riak-monitoring-extension/target" includes="riak-monitoring-extension.jar"/>
   </copy>
-  <zip destfile="/Users/kunal.gupta/Repos/AppDynamics/extensions/riak-monitoring-extension/target/RiakMonitor.zip">
+  <zip destfile="/Users/kunal.gupta/Repos/AppDynamics/extensions/riak-monitoring-extension/target/RiakMonitor-1.0.2.zip">
     <zipfileset filemode="755" dir="/Users/kunal.gupta/Repos/AppDynamics/extensions/riak-monitoring-extension/target/RiakMonitor" prefix="RiakMonitor/"/>
   </zip>
   <delete dir="/Users/kunal.gupta/Repos/AppDynamics/extensions/riak-monitoring-extension/target/RiakMonitor"/>

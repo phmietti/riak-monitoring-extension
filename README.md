@@ -96,9 +96,9 @@ We support cluster level metrics only if each node in the cluster have a separat
 
 2. Make sure that in every node in the cluster, the <MACHINE_AGENT_HOME>/monitors/RiakMonitor/config.yaml should emit the same metric path. To achieve this make the displayName to be empty string and remove the trailing "|" in the metricPrefix.  
 
-To make it more clear,assume that Cassandra "Node A" and Cassandra "Node B" belong to the same cluster "ClusterAB". In order to achieve cluster level as well as node level metrics, you should do the following
+To make it more clear,assume that Riak "Node A" and Riak "Node B" belong to the same cluster "ClusterAB". In order to achieve cluster level as well as node level metrics, you should do the following
         
-1. Both Node A and Node B should have separate machine agents installed on them. Both the machine agent should have their own Cassandra extension.
+1. Both Node A and Node B should have separate machine agents installed on them. Both the machine agent should have their own Riak extension.
     
 2. In the Node A's and Node B's machine agents' controller-info.xml make sure that you have the tier name to be your cluster name , "ClusterAB" here. Also, nodeName in controller-info.xml is Node A and Node B resp.
         
