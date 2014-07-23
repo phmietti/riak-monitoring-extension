@@ -4,6 +4,7 @@ package com.appdynamics.extensions.riak;
 import com.appdynamics.extensions.http.Response;
 import com.appdynamics.extensions.http.SimpleHttpClient;
 import com.appdynamics.extensions.riak.config.Server;
+import com.appdynamics.extensions.util.MetricUtils;
 import org.apache.log4j.Logger;
 import org.codehaus.jackson.type.TypeReference;
 
@@ -56,27 +57,17 @@ public class RiakMonitorTask implements Callable<RiakMetrics> {
             String key = entry.getKey();
             Object value = entry.getValue();
             if(metrics.contains(key) && value instanceof Number){
-                String attribStr = convertMetricValuesToString(value);
+                if (logger.isDebugEnabled()) {
+                    logger.debug("Metric key:value before rounding off = "+ key + ":" + String.valueOf(value));
+                }
+                String attribStr = MetricUtils.toWholeNumberString(value);
                 filteredMetrics.put(key,attribStr);
             }
         }
         return filteredMetrics;
     }
 
-    /**
-     * Currently, appD controller only supports Integer values. This function will round all the decimals into integers and convert them into strings.
-     * @param attribute
-     * @return
-     */
-    private String convertMetricValuesToString(Object attribute) {
-        if(attribute instanceof Double){
-            return String.valueOf(Math.round((Double) attribute));
-        }
-        else if(attribute instanceof Float){
-            return String.valueOf(Math.round((Float) attribute));
-        }
-        return attribute.toString();
-    }
+
 
     private String constructUrl() {
         String scheme = "http://";
